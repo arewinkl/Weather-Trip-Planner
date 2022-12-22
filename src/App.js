@@ -9,10 +9,10 @@ console.log(API_KEY);
 function getAllWeather() {
   axios
     .get(
-      "https://api.openweathermap.org/data/2.5/weather?q=Denver,Colorado&appid=5f06a771d25b62ba916f476b3f89f810"
+      `https://api.openweathermap.org/data/2.5/weather?q=Denver,Colorado&appid=${API_KEY}`
     )
     .then((res) => {
-      console.log(res);
+      console.log(res.data);
     })
     .catch((err) => {
       console.log(err);
