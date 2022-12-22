@@ -1,11 +1,14 @@
-const API_KEY = process.env.REACT_APP_WEATHER_KEY;
-console.log(API_KEY);
+const axios = require(axios);
 
-export async function getAllWeather() {
-  try {
-    const response = await fetch("/api/users");
-    return await response.json();
-  } catch (error) {
-    return [];
-  }
+function getAllWeather() {
+  axios
+    .get(
+      "https://api.openweathermap.org/data/2.5/weather?q=Denver,Colorado&appid=5f06a771d25b62ba916f476b3f89f810"
+    )
+    .then((res) => {
+      console.log(res);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 }
