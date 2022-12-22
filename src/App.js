@@ -3,6 +3,7 @@ import React from "react";
 
 const API_KEY = process.env.REACT_APP_WEATHER_KEY;
 console.log(API_KEY);
+
 function App() {
   return (
     <div className="App">
