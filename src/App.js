@@ -28,7 +28,7 @@ getAllWeather();
 function App() {
   return (
     <div className="App">
-      <NavBar />
+      {/* <NavBar /> */}
       <header className="App-header">
         <h2>Weather Planner</h2>
       </header>
