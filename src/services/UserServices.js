@@ -1,5 +1,4 @@
 import API_KEY from "../App";
-import React from "react";
 import axios from "axios";
 function getAllWeather() {
   axios
@@ -13,3 +12,4 @@ function getAllWeather() {
       console.log(err);
     });
 }
+export default getAllWeather;
