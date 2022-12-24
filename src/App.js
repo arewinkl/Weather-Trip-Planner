@@ -1,53 +1,57 @@
-import "./App.css";
-import React from "react";
-import axios from "axios";
-import NavBar from "./components/NavBar";
-import { Route } from "react-router-dom";
-import Current from "./components/CurrentWeather";
-import Weekly from "./components/WeeklyForecast";
-import Map from "./components/WeatherMap";
+import './App.css'
+import React from 'react'
+import axios from 'axios'
+import NavBar from './components/NavBar'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import Current from './components/CurrentWeather'
+import Weekly from './components/WeeklyForecast'
+import Map from './components/WeatherMap'
 
 // import getAllWeather from "./services/UserServices";
 
-const API_KEY = process.env.REACT_APP_WEATHER_KEY;
-console.log(API_KEY);
+const API_KEY = process.env.REACT_APP_WEATHER_KEY
+console.log(API_KEY)
 
 function getAllWeather() {
   axios
     .get(
-      `https://api.openweathermap.org/data/2.5/weather?q=Denver,Colorado&appid=${API_KEY}`
+      `https://api.openweathermap.org/data/2.5/weather?q=Denver,Colorado&appid=${API_KEY}`,
     )
     .then((res) => {
-      console.log(res.data);
+      console.log(res.data)
     })
     .catch((err) => {
-      console.log(err);
-    });
+      console.log(err)
+    })
 }
-getAllWeather();
+getAllWeather()
 function App() {
   return (
     <div className="App">
-      {/* <NavBar /> */}
-      <header className="App-header">
-        <h2>Weather Planner</h2>
-      </header>
+      <NavBar />
       <main>
+      <header className="App-header">
+        <h2>Weather Planner Nav</h2>
+      </header>
         <div>
-          {/* <Route exact path="/"></Route> */}
-          <Route exact path="/current">
-            <Current />
-          </Route>
-          <Route exact path="/weekly">
-            <Weekly />
-          </Route>
-          <Route exact path="/map">
-            <Map />
-          </Route>
+          <Route exact path="/"></Route>
+          <BrowserRouter>
+            <Routes>
+              <Route>
+              <Route exact path="/current">
+                <Current />
+              </Route>
+              <Route exact path="/weekly">
+                <Weekly />
+              </Route>
+              <Route exact path="/map" element ={<Map/>}/>
+              </Route>
+            </Routes>
+          </BrowserRouter>
         </div>
       </main>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
