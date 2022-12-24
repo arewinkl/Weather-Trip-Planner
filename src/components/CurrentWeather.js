@@ -1,4 +1,5 @@
-export default function CurrentWeather(){
+export default function CurrentWeather({getAllWeather}){
+    // console.log(getAllWeather)
     return(
         <div>
             current

@@ -6,11 +6,23 @@ import { Routes, Route } from 'react-router-dom'
 import CurrentWeather from './components/CurrentWeather'
 import WeeklyForecast from './components/WeeklyForecast'
 import WeatherMap from './components/WeatherMap'
-import getAllWeather from "./services/UserServices";
+import GetAllWeather from "./services/UserServices";
 
-getAllWeather()
+
 
 function App() {
+
+  const [current, setCurrent] = useState([])
+
+
+  // function getWeather(e){
+  //   GetAllWeather(e)
+  //   .then(res => {
+  //     console.log(res)
+  //     setCurrent(res)
+  //   })
+  // }
+
   return (
     <div className="App">
       <NavBar />
@@ -20,7 +32,7 @@ function App() {
       <Routes>
         <Route 
           path="/current" 
-          element={<CurrentWeather />} 
+          element={<CurrentWeather/>} 
         />
         <Route
           path="/weekly"
