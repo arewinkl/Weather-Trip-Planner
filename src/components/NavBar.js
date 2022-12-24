@@ -1,19 +1,47 @@
-import { Link, Router } from "react-router-dom";
+import { Routes, Route } from 'react-router-dom'
+import Current from './CurrentWeather'
+import Weekly from './WeeklyForecast'
+import Map from './WeatherMap'
 
-function navBar() {
+export default function NavBar() {
   return (
-    <div className="App">
-      <h1>weather stuff</h1>
-      <div>
-        <Router>
-        <Link to="/">Home</Link>
-        <Link to="/currentWeather">Current Weather</Link>
-        <Link to="/weeklyWeather">Weekly Weather</Link>
-        <Link to="/weatherMaps">Weather Maps</Link>
-        </Router>
-      </div>
-    </div>
-  );
-}
+    <div className= 'navbar'>
+      <div className='search-bar'>
+          <input
+          type='search'
+          >
+          </input>
+          <input
+          type='button'
+          value='submit'
+          >
+          </input>
 
-export default navBar;
+      </div>
+    <div className="pages">
+      <ul className="page-links">
+        <li className="li-link">
+          <a href="/" className="a-link">
+            Home
+          </a>
+        </li>
+        <li className="li-link">
+          <a href="/current" className="a-link">
+            Current Weather
+          </a>
+        </li>
+        <li className="li-link">
+          <a href="/weekly" className="a-link">
+            Weekly Forecast
+          </a>
+        </li>
+        <li className="li-link">
+          <a href="/map" className="a-link">
+            Weather Map
+          </a>
+        </li>
+      </ul>
+    </div>
+    </div>
+  )
+}

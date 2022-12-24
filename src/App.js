@@ -1,53 +1,38 @@
-import "./App.css";
-import React from "react";
-import axios from "axios";
-import NavBar from "./components/NavBar";
-import { Route } from "react-router-dom";
-import Current from "./components/CurrentWeather";
-import Weekly from "./components/WeeklyForecast";
-import Map from "./components/WeatherMap";
+import './App.css'
+import {useEffect, useState} from 'react'
+import axios from 'axios'
+import NavBar from './components/NavBar'
+import { Routes, Route } from 'react-router-dom'
+import CurrentWeather from './components/CurrentWeather'
+import WeeklyForecast from './components/WeeklyForecast'
+import WeatherMap from './components/WeatherMap'
+import getAllWeather from "./services/UserServices";
 
-// import getAllWeather from "./services/UserServices";
+getAllWeather()
 
-const API_KEY = process.env.REACT_APP_WEATHER_KEY;
-console.log(API_KEY);
-
-function getAllWeather() {
-  axios
-    .get(
-      `https://api.openweathermap.org/data/2.5/weather?q=Denver,Colorado&appid=${API_KEY}`
-    )
-    .then((res) => {
-      console.log(res.data);
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-}
-getAllWeather();
 function App() {
   return (
     <div className="App">
-      {/* <NavBar /> */}
+      <NavBar />
       <header className="App-header">
-        <h2>Weather Planner</h2>
+        <h2>Weather Planner Nav</h2>
       </header>
-      <main>
-        <div>
-          {/* <Route exact path="/"></Route> */}
-          <Route exact path="/current">
-            <Current />
-          </Route>
-          <Route exact path="/weekly">
-            <Weekly />
-          </Route>
-          <Route exact path="/map">
-            <Map />
-          </Route>
-        </div>
-      </main>
+      <Routes>
+        <Route 
+          path="/current" 
+          element={<CurrentWeather />} 
+        />
+        <Route
+          path="/weekly"
+          element={<WeeklyForecast />}
+        />
+        <Route
+          path="/map"
+          element={<WeatherMap />}
+        />
+      </Routes>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App

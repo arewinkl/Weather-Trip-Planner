@@ -47,3 +47,34 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+
+.navbar{
+  width: 100%;
+}
+
+.search-bar{
+ display: inline-block
+}
+
+.pages{
+
+}
+
+
+.page-links{
+  display: flex;
+  list-style-type: none;
+  justify-content: space-around;
+  padding: 0
+}
+
+.li-link{
+
+}
+
+.a-link{
+  color: white;
+  text-decoration: none;
+}
+
