@@ -9,14 +9,22 @@ export default function NavBar() {
       <div className='search-bar'>
           <input
           type='search'
+          placeholder='City'
           >
           </input>
+          <br/>
+          <input
+          type='search'
+          placeholder='State/Country'
+          >
+
+          </input>
+          <br/>
           <input
           type='button'
           value='submit'
           >
           </input>
-
       </div>
     <div className="pages">
       <ul className="page-links">

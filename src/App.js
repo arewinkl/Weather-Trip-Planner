@@ -7,21 +7,33 @@ import CurrentWeather from './components/CurrentWeather'
 import WeeklyForecast from './components/WeeklyForecast'
 import WeatherMap from './components/WeatherMap'
 import GetAllWeather from "./services/UserServices";
+import { isCompositeComponent } from 'react-dom/test-utils'
 
 
+GetAllWeather()
 
 function App() {
 
-  const [current, setCurrent] = useState([])
+    const API_KEY = process.env.REACT_APP_WEATHER_KEY
+    const [current, setCurrent] = useState([])
+    const [weekly, setWeekly] = useState([])
+    const [map, setMap] = useState([])
+
+  
+    useEffect(() => {
+    axios
+      .get(
+        `https://api.openweathermap.org/data/2.5/weather?q=Denver,Colorado&appid=${API_KEY}`
+      )
+      .then((res) => res)
+      .then((res) => setCurrent(res))
+      .catch((err) => {
+        console.log(err);
+    })}
+      , [], 
+    );
 
 
-  // function getWeather(e){
-  //   GetAllWeather(e)
-  //   .then(res => {
-  //     console.log(res)
-  //     setCurrent(res)
-  //   })
-  // }
 
   return (
     <div className="App">
@@ -32,7 +44,7 @@ function App() {
       <Routes>
         <Route 
           path="/current" 
-          element={<CurrentWeather/>} 
+          element={<CurrentWeather current = {current}/>} 
         />
         <Route
           path="/weekly"
