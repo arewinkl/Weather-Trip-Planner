@@ -2,30 +2,12 @@ import { Routes, Route } from 'react-router-dom'
 import Current from './CurrentWeather'
 import Weekly from './WeeklyForecast'
 import Map from './WeatherMap'
+import SearchBar from './SearchBar'
 
-export default function NavBar() {
+export default function NavBar({onCitySearch, onStateSearch}) {
   return (
     <div className= 'navbar'>
-      <div className='search-bar'>
-          <input
-          type='search'
-          placeholder='City'
-          >
-          </input>
-          <br/>
-          <input
-          type='search'
-          placeholder='State/Country'
-          >
-
-          </input>
-          <br/>
-          <input
-          type='button'
-          value='submit'
-          >
-          </input>
-      </div>
+      <SearchBar onCitySearch={onCitySearch} onStateSearch={onStateSearch} />
     <div className="pages">
       <ul className="page-links">
         <li className="li-link">

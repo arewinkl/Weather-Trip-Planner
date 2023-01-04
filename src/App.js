@@ -19,11 +19,26 @@ function App() {
     const [weekly, setWeekly] = useState([])
     const [map, setMap] = useState([])
 
-  
+
+
+    const [city, setCity] = useState('Denver')
+    const [place, setPlace] = useState('Colorado')
+
+function setCitySearch(e){
+ setCity(e)
+}
+
+function setStateSearch(e){
+  setPlace(e)
+ }
+
+console.log(city)
+console.log(place)
+
     useEffect(() => {
     axios
       .get(
-        `https://api.openweathermap.org/data/2.5/weather?q=Denver,Colorado&appid=${API_KEY}`
+        `https://api.openweathermap.org/data/2.5/weather?q=${city},${place}&appid=${API_KEY}`
       )
       .then((res) => res)
       .then((res) => setCurrent(res))
@@ -34,10 +49,9 @@ function App() {
     );
 
 
-
   return (
     <div className="App">
-      <NavBar />
+      <NavBar  onCitySearch={setCitySearch} onStateSearch={setStateSearch} />
       <header className="App-header">
         <h2>Weather Planner Nav</h2>
       </header>
