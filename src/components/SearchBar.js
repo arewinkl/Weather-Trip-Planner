@@ -1,14 +1,15 @@
 import { useEffect, useState } from 'react'
 
-export default function SearchBar({onStateSearch, onCitySearch}) {
+export default function SearchBar({createSearch}) {
     const [citySearch, setCitySearch] = useState('')
     const [stateSearch, setStateSearch] = useState('')
   
 
   function handleSearch(e) {
     e.preventDefault()
-    onCitySearch(citySearch)
-    onStateSearch(stateSearch)
+    createSearch(citySearch, stateSearch)
+    setCitySearch('')
+    setStateSearch('')
   }
 
   return (

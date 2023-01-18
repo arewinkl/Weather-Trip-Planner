@@ -19,39 +19,35 @@ function App() {
     const [weekly, setWeekly] = useState([])
     const [map, setMap] = useState([])
 
+  //   const importWeather = async() => {
+  //   await axios
+  //     .get(
+  //       `https://api.openweathermap.org/data/2.5/weather?q=${city},${place}&appid=${API_KEY}`
+  //     )
+  //     .then((res) => res)
+  //     .then((res) => setCurrent(res)) 
+  //     .catch((err) => {
+  //       console.log(err);
+  //   })
+  // }
+
+  // useEffect(async () => {
+  //   const current = await axios
+  //     .get(
+  //     `https://api.openweathermap.org/data/2.5/weather?q=${city},${place}&appid=${API_KEY}`
+  //   )
+  //   console.log(current)
+  //   }, []);  
 
 
-    const [city, setCity] = useState('Denver')
-    const [place, setPlace] = useState('Colorado')
-
-function setCitySearch(e){
- setCity(e)
+async function createSearch(a, b){
+  let current = await axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${a},${b}&appid=${API_KEY}`)
+  console.log(current)
 }
-
-function setStateSearch(e){
-  setPlace(e)
- }
-
-console.log(city)
-console.log(place)
-
-    useEffect(() => {
-    axios
-      .get(
-        `https://api.openweathermap.org/data/2.5/weather?q=${city},${place}&appid=${API_KEY}`
-      )
-      .then((res) => res)
-      .then((res) => setCurrent(res))
-      .catch((err) => {
-        console.log(err);
-    })}
-      , [], 
-    );
-
 
   return (
     <div className="App">
-      <NavBar  onCitySearch={setCitySearch} onStateSearch={setStateSearch} />
+      <NavBar createSearch={createSearch}/>
       <header className="App-header">
         <h2>Weather Planner Nav</h2>
       </header>
