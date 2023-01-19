@@ -7,6 +7,8 @@ export default function SearchBar({currentSearch, weeklySearch}) {
 // if citysearch or statesearch = "", then message
 // if ciitysearch or statesearch are mispelled/incorrect, then alert
 // else, createSearch function 
+
+
   function handleSearch(e) {
     e.preventDefault()
     if (citySearch == '' && stateSearch == ''){
