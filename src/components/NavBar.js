@@ -4,10 +4,10 @@ import Weekly from './WeeklyForecast'
 import Map from './WeatherMap'
 import SearchBar from './SearchBar'
 
-export default function NavBar({createSearch}) {
+export default function NavBar({currentSearch, weeklySearch}) {
   return (
     <div className= 'navbar'>
-      <SearchBar createSearch={createSearch}/>
+      <SearchBar currentSearch={currentSearch} weeklySearch={weeklySearch}/>
     <div className="pages">
       <ul className="page-links">
         <li className="li-link">

@@ -18,36 +18,34 @@ function App() {
     const [current, setCurrent] = useState([])
     const [weekly, setWeekly] = useState([])
     const [map, setMap] = useState([])
-
-  //   const importWeather = async() => {
-  //   await axios
-  //     .get(
-  //       `https://api.openweathermap.org/data/2.5/weather?q=${city},${place}&appid=${API_KEY}`
-  //     )
-  //     .then((res) => res)
-  //     .then((res) => setCurrent(res)) 
-  //     .catch((err) => {
-  //       console.log(err);
-  //   })
-  // }
-
-  // useEffect(async () => {
-  //   const current = await axios
-  //     .get(
-  //     `https://api.openweathermap.org/data/2.5/weather?q=${city},${place}&appid=${API_KEY}`
-  //   )
-  //   console.log(current)
-  //   }, []);  
+    // const [longitude, setLongitude] = useState('')
+    // const [latitude, setLatitude] = useState('')
 
 
-async function createSearch(a, b){
-  let current = await axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${a},${b}&appid=${API_KEY}`)
-  console.log(current)
-}
+async function currentSearch(a, b){
+  const currentWeather = await axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${a},${b}&appid=${API_KEY}`)
+  setCurrent(currentWeather)
+  // setLongitude(current.data.coord.lon)
+  // setLatitude(current.data.coord.lat)
+} 
+
+
+  async function weeklySearch(a, b){
+    const weeklyWeather = await axios.get(`https://api.openweathermap.org/data/2.5/forecast?q=${a},${b}&appid=${API_KEY}`)
+    setWeekly(weeklyWeather)
+    console.log(weeklyWeather)
+  }
+
+
+// async function weeklySearch(a, b){
+//   const weeklyWeather = await axios.get(`https://api.openweathermap.org/data/2.5/forecast?lat=${a}&lon=${b}&appid=${API_KEY}`)
+//   setWeekly(weeklyWeather)
+//   console.log(weeklyWeather)
+// }
 
   return (
     <div className="App">
-      <NavBar createSearch={createSearch}/>
+      <NavBar currentSearch={currentSearch} weeklySearch={weeklySearch}/>
       <header className="App-header">
         <h2>Weather Planner Nav</h2>
       </header>
