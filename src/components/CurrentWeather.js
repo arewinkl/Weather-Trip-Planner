@@ -12,7 +12,7 @@ export default function CurrentWeather({current, showWeather}){
     // const wind = showWeather.data.wind.speed < 10 ? "Slight Wind" : showWeather.data.wind.speed > 10 && showWeather.data.wind.speed < 30 ? "Moderate Wind" : "High Wind"
 
 
-
+console.log(current)
     const name = current.data.name
     const icon = current.data.weather[0].icon
     const temp = Math.floor((current.data.main.temp - 273.15) * 9/5 + 32)
