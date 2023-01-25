@@ -1,7 +1,7 @@
 import { Routes, Route } from 'react-router-dom'
-import Current from './CurrentWeather'
-import Weekly from './WeeklyForecast'
-import Map from './WeatherMap'
+// import Current from '/CurrentWeather'
+// import Weekly from '/WeeklyForecast'
+// import Map from '/WeatherMap'
 import SearchBar from './SearchBar'
 
 export default function NavBar({currentSearch, weeklySearch}) {
