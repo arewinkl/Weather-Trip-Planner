@@ -5,11 +5,21 @@ export default function CurrentWeather({current, showWeather}){
     }
 
     
+
     // const name = showWeather.data.name
-    // const icon = showWeather.data.weather[0].icon
-    // const temp = Math.floor((showWeather.data.main.temp - 273.15) * 9/5 + 32)
-    // const weatherDescription = showWeather.data.weather[0].description
-    // const wind = showWeather.data.wind.speed < 10 ? "Slight Wind" : showWeather.data.wind.speed > 10 && showWeather.data.wind.speed < 30 ? "Moderate Wind" : "High Wind"
+// const icon = showWeather.data.weather[0].icon
+// const temp = Math.floor((showWeather.data.main.temp - 273.15) * 9/5 + 32)
+// const weatherDescription = showWeather.data.weather[0].description
+// const wind = showWeather.data.wind.speed < 10 ? "Slight Wind" : showWeather.data.wind.speed > 10 && showWeather.data.wind.speed < 30 ? "Moderate Wind" : "High Wind"
+
+const d = new Date();
+console.log(d, "sdfds");
+// TODO We can use the Date() function to get the current date and time to display on our current weather page ex: Mon Jan 23 2023 17:40:11 GMT-0700 (Mountain Standard Time)
+console.log(new Date(1674907200 * 1000), "this one");
+let day = d.getDay();
+console.log(day);
+//TODO This will give you a number that can be used to correspond do a day of the week 0-6.
+
 
 
 console.log(current)
