@@ -1,3 +1,5 @@
+import { all } from "axios";
+
 export default function WeeklyForecast({ weekly }) {
   if (weekly.length < 1) {
     return "Loading...";
@@ -11,11 +13,11 @@ export default function WeeklyForecast({ weekly }) {
   const day_four_temps = [];
   const day_five_temps = [];
   const day_six_temps = [];
-  //   const day_seven_temps = [];
-  //   console.log(all_temps);
-  const weeklyData = [];
 
+  const weeklyData = [];
+  console.log(all_temps);
   for (let x = 0, week = []; x < all_temps.length; x++) {
+    //TODO this gets the days of the week for the weekly forecast.
     if (
       !weeklyData.includes(
         new Date(all_temps[x].dt * 1000).toDateString().substring(0, 3)
@@ -35,43 +37,32 @@ export default function WeeklyForecast({ weekly }) {
       week[0]
     ) {
       day_one_temps.push(all_temps[x].main.temp);
-    }
-    if (
+    } else if (
       new Date(all_temps[x].dt * 1000).toDateString().substring(0, 3) ===
       week[1]
     ) {
       day_two_temps.push(all_temps[x].main.temp);
-    }
-    if (
+    } else if (
       new Date(all_temps[x].dt * 1000).toDateString().substring(0, 3) ===
       week[2]
     ) {
       day_three_temps.push(all_temps[x].main.temp);
-    }
-    if (
+    } else if (
       new Date(all_temps[x].dt * 1000).toDateString().substring(0, 3) ===
       week[3]
     ) {
       day_four_temps.push(all_temps[x].main.temp);
-    }
-    if (
+    } else if (
       new Date(all_temps[x].dt * 1000).toDateString().substring(0, 3) ===
       week[4]
     ) {
       day_five_temps.push(all_temps[x].main.temp);
-    }
-    if (
+    } else if (
       new Date(all_temps[x].dt * 1000).toDateString().substring(0, 3) ===
       week[5]
     ) {
       day_six_temps.push(all_temps[x].main.temp);
     }
-    // if (
-    //   new Date(all_temps[x].dt * 1000).toDateString().substring(0, 3) ===
-    //   week[6]
-    // ) {
-    //   day_seven_temps.push(all_temps[x].main.temp);
-    // }
   }
 
   console.log(weeklyData);
