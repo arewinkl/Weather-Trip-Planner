@@ -15,57 +15,111 @@ export default function WeeklyForecast({ weekly }) {
   const day_six_temps = [];
 
   const weeklyData = [];
-  console.log(all_temps);
-  for (let x = 0, week = []; x < all_temps.length; x++) {
+
+  const data = []
+
+  
+//   console.log(all_temps);
+
+  for (let x = 0, 
+            week = [], 
+            dayOneTemps = [], 
+            dayTwoTemps = [],
+            dayThreeTemps = [],
+            dayFourTemps = [],
+            dayFiveTemps = [],
+            daySixTemps = [];
+     x < all_temps.length; x++) {
     //TODO this gets the days of the week for the weekly forecast.
-    if (
-      !weeklyData.includes(
-        new Date(all_temps[x].dt * 1000).toDateString().substring(0, 3)
-      )
-    ) {
-      weeklyData.push(
-        new Date(all_temps[x].dt * 1000).toDateString().substring(0, 3)
-      );
+    // if (
+    //   !weeklyData.includes(
+    //     new Date(all_temps[x].dt * 1000).toDateString().substring(0, 3)
+    //   )
+    // ) {
+    //   weeklyData.push(
+    //     new Date(all_temps[x].dt * 1000).toDateString().substring(0, 3)
+    //   );
+    if(
+        !data.some(e => e.day === new Date(all_temps[x].dt * 1000).toDateString().substring(0, 3))){
+        data.push(
+            {
+                day: new Date(all_temps[x].dt * 1000).toDateString().substring(0, 3),
+                icon: all_temps[x].weather[0].description,
+                weather: []
+            }
+            
+        )
       week.push(
         new Date(all_temps[x].dt * 1000).toDateString().substring(0, 3)
       );
-    }
-
+      } 
     //TODO Below is the if statements that match the day from the week variable that is set in the for loop and pushes the weather out for each day. All data needs to be sorted and then printed to the page.
     if (
       new Date(all_temps[x].dt * 1000).toDateString().substring(0, 3) ===
       week[0]
     ) {
-      day_one_temps.push(all_temps[x].main.temp);
+    //   day_one_temps.push(all_temps[x].main.temp);
+    dayOneTemps.push(all_temps[x].main.temp)
     } else if (
       new Date(all_temps[x].dt * 1000).toDateString().substring(0, 3) ===
       week[1]
     ) {
-      day_two_temps.push(all_temps[x].main.temp);
+    //   day_two_temps.push(all_temps[x].main.temp);
+    dayTwoTemps.push(all_temps[x].main.temp)
     } else if (
       new Date(all_temps[x].dt * 1000).toDateString().substring(0, 3) ===
       week[2]
     ) {
-      day_three_temps.push(all_temps[x].main.temp);
+    //   day_three_temps.push(all_temps[x].main.temp);
+    dayThreeTemps.push(all_temps[x].main.temp)
     } else if (
       new Date(all_temps[x].dt * 1000).toDateString().substring(0, 3) ===
       week[3]
     ) {
-      day_four_temps.push(all_temps[x].main.temp);
+    //   day_four_temps.push(all_temps[x].main.temp);
+    dayFourTemps.push(all_temps[x].main.temp)
     } else if (
       new Date(all_temps[x].dt * 1000).toDateString().substring(0, 3) ===
       week[4]
     ) {
-      day_five_temps.push(all_temps[x].main.temp);
+    //   day_five_temps.push(all_temps[x].main.temp);
+    dayFiveTemps.push(all_temps[x].main.temp)
     } else if (
       new Date(all_temps[x].dt * 1000).toDateString().substring(0, 3) ===
       week[5]
     ) {
-      day_six_temps.push(all_temps[x].main.temp);
-    }
+    //   day_six_temps.push(all_temps[x].main.temp);
+    daySixTemps.push(all_temps[x].main.temp)
+    data = [...data, all_temps[x].main.temp]
+}
   }
 
   console.log(weeklyData);
+
+
+  const dayOneLow = Math.floor((day_one_temps.sort()[0] - 273.15) * (9 / 5) + 32).toString() + "\u00B0F"
+  const dayOneHigh = Math.ceil((day_one_temps.sort()[day_one_temps.length - 1] - 273.15) * (9 / 5) + 32).toString() + "\u00B0F"
+
+// data.push({day: weeklyData[0], low: dayOneLow, high: dayOneHigh})
+
+  const dayTwoLow = Math.floor((day_two_temps.sort()[0] - 273.15) * (9 / 5) + 32).toString() + "\u00B0F"
+  const dayTwoHigh = Math.ceil((day_two_temps.sort()[day_two_temps.length - 1] - 273.15) * (9 / 5) + 32).toString() + "\u00B0F"
+
+  const dayThreeLow = Math.floor((day_three_temps.sort()[0] - 273.15) * (9 / 5) + 32).toString() + "\u00B0F"
+  const dayThreeHigh = Math.ceil((day_three_temps.sort()[day_three_temps.length - 1] - 273.15) * (9 / 5) + 32).toString() + "\u00B0F"
+
+  const dayFourLow = Math.floor((day_four_temps.sort()[0] - 273.15) * (9 / 5) + 32).toString() + "\u00B0F"
+  const dayFourHigh = Math.ceil((day_four_temps.sort()[day_four_temps.length - 1] - 273.15) * (9 / 5) + 32).toString() + "\u00B0F"
+
+  const dayFiveLow = Math.floor((day_five_temps.sort()[0] - 273.15) * (9 / 5) + 32).toString() + "\u00B0F"
+  const dayFiveHigh = Math.ceil((day_five_temps.sort()[day_five_temps.length - 1] - 273.15) * (9 / 5) + 32).toString() + "\u00B0F"
+
+
+  const daySixLow = Math.floor((day_six_temps.sort()[0] - 273.15) * (9 / 5) + 32).toString() + "\u00B0F"
+  const daySixHigh = Math.ceil((day_six_temps.sort()[day_six_temps.length - 1] - 273.15) * (9 / 5) + 32).toString() + "\u00B0F"
+
+  console.log(dayTwoHigh, dayTwoLow)
+
   console.log(
     "Day 1 temps:",
     Math.floor((day_one_temps.sort()[0] - 273.15) * (9 / 5) + 32).toString() +
@@ -105,6 +159,8 @@ export default function WeeklyForecast({ weekly }) {
       (day_six_temps.sort()[day_six_temps.length - 1] - 273.15) * (9 / 5) + 32
     ).toString() + "\u00B0F"
   );
+
+  console.log(data)
 
   return (
     <div>
