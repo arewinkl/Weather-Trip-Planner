@@ -11,7 +11,7 @@ export default function WeeklyForecast({ weekly }) {
   const day_four_temps = [];
   const day_five_temps = [];
   const day_six_temps = [];
-  const day_seven_temps = [];
+  //   const day_seven_temps = [];
   //   console.log(all_temps);
   const weeklyData = [];
 
@@ -66,28 +66,53 @@ export default function WeeklyForecast({ weekly }) {
     ) {
       day_six_temps.push(all_temps[x].main.temp);
     }
-    if (
-      new Date(all_temps[x].dt * 1000).toDateString().substring(0, 3) ===
-      week[6]
-    ) {
-      day_seven_temps.push(all_temps[x].main.temp);
-    }
+    // if (
+    //   new Date(all_temps[x].dt * 1000).toDateString().substring(0, 3) ===
+    //   week[6]
+    // ) {
+    //   day_seven_temps.push(all_temps[x].main.temp);
+    // }
   }
 
   console.log(weeklyData);
   console.log(
-    day_one_temps.sort(),
-    "day 1",
-    day_two_temps.sort(),
-    "day 2",
-    day_three_temps.sort(),
-    "day 3",
-    day_four_temps.sort(),
-    "day 4",
-    day_six_temps.sort(),
-    "day 6",
-    day_seven_temps.sort(),
-    "day 7"
+    "Day 1 temps:",
+    Math.floor((day_one_temps.sort()[0] - 273.15) * (9 / 5) + 32).toString() +
+      "\u00B0F",
+    Math.ceil(
+      (day_one_temps.sort()[day_one_temps.length - 1] - 273.15) * (9 / 5) + 32
+    ).toString() + "\u00B0F",
+    "Day 2 temps:",
+    Math.floor((day_two_temps.sort()[0] - 273.15) * (9 / 5) + 32).toString() +
+      "\u00B0F",
+    Math.ceil(
+      (day_two_temps.sort()[day_two_temps.length - 1] - 273.15) * (9 / 5) + 32
+    ).toString() + "\u00B0F",
+    "Day 3 temps:",
+    Math.floor((day_three_temps.sort()[0] - 273.15) * (9 / 5) + 32).toString() +
+      "\u00B0F",
+    Math.ceil(
+      (day_three_temps.sort()[day_three_temps.length - 1] - 273.15) * (9 / 5) +
+        32
+    ).toString() + "\u00B0F",
+    "Day 4 temps:",
+    Math.floor((day_four_temps.sort()[0] - 273.15) * (9 / 5) + 32).toString() +
+      "\u00B0F",
+    Math.ceil(
+      (day_four_temps.sort()[day_four_temps.length - 1] - 273.15) * (9 / 5) + 32
+    ).toString() + "\u00B0F",
+    "Day 5 temps:",
+    Math.floor((day_five_temps.sort()[0] - 273.15) * (9 / 5) + 32).toString() +
+      "\u00B0F",
+    Math.ceil(
+      (day_five_temps.sort()[day_five_temps.length - 1] - 273.15) * (9 / 5) + 32
+    ).toString() + "\u00B0F",
+    "Day 6 temps:",
+    Math.floor((day_six_temps.sort()[0] - 273.15) * (9 / 5) + 32).toString() +
+      "\u00B0F",
+    Math.ceil(
+      (day_six_temps.sort()[day_six_temps.length - 1] - 273.15) * (9 / 5) + 32
+    ).toString() + "\u00B0F"
   );
 
   return (
