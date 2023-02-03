@@ -6,7 +6,8 @@ export default function WeeklyForecast({ weekly }) {
   }
 
   const all_temps = weekly.data.list;
-
+  const data = [];
+  console.log(all_temps, "data");
   const day_one_temps = [];
   const day_two_temps = [];
   const day_three_temps = [];
@@ -15,7 +16,8 @@ export default function WeeklyForecast({ weekly }) {
   const day_six_temps = [];
 
   const weeklyData = [];
-  console.log(all_temps);
+  const weeklyIcons = [];
+
   for (let x = 0, week = []; x < all_temps.length; x++) {
     //TODO this gets the days of the week for the weekly forecast.
     if (
@@ -30,81 +32,35 @@ export default function WeeklyForecast({ weekly }) {
         new Date(all_temps[x].dt * 1000).toDateString().substring(0, 3)
       );
     }
-
-    //TODO Below is the if statements that match the day from the week variable that is set in the for loop and pushes the weather out for each day. All data needs to be sorted and then printed to the page.
     if (
-      new Date(all_temps[x].dt * 1000).toDateString().substring(0, 3) ===
-      week[0]
+      !data.some(
+        (e) =>
+          e.day ===
+          new Date(all_temps[x].dt * 1000).toDateString().substring(0, 3)
+      )
     ) {
-      day_one_temps.push(all_temps[x].main.temp);
+      data.push({
+        day: new Date(all_temps[x].dt * 1000).toDateString().substring(0, 3),
+        icon: all_temps[x].weather[0].description,
+        weather: [
+          Math.round((all_temps[x].main.temp - 273) * (9 / 5) + 32).toString() +
+            "\u00B0F",
+        ],
+      });
     } else if (
       new Date(all_temps[x].dt * 1000).toDateString().substring(0, 3) ===
-      week[1]
+      new Date(all_temps[x].dt * 1000).toDateString().substring(0, 3)
     ) {
-      day_two_temps.push(all_temps[x].main.temp);
-    } else if (
-      new Date(all_temps[x].dt * 1000).toDateString().substring(0, 3) ===
-      week[2]
-    ) {
-      day_three_temps.push(all_temps[x].main.temp);
-    } else if (
-      new Date(all_temps[x].dt * 1000).toDateString().substring(0, 3) ===
-      week[3]
-    ) {
-      day_four_temps.push(all_temps[x].main.temp);
-    } else if (
-      new Date(all_temps[x].dt * 1000).toDateString().substring(0, 3) ===
-      week[4]
-    ) {
-      day_five_temps.push(all_temps[x].main.temp);
-    } else if (
-      new Date(all_temps[x].dt * 1000).toDateString().substring(0, 3) ===
-      week[5]
-    ) {
-      day_six_temps.push(all_temps[x].main.temp);
-    }
-  }
+      let index = week.length - 1;
 
-  console.log(weeklyData);
-  console.log(
-    "Day 1 temps:",
-    Math.floor((day_one_temps.sort()[0] - 273.15) * (9 / 5) + 32).toString() +
-      "\u00B0F",
-    Math.ceil(
-      (day_one_temps.sort()[day_one_temps.length - 1] - 273.15) * (9 / 5) + 32
-    ).toString() + "\u00B0F",
-    "Day 2 temps:",
-    Math.floor((day_two_temps.sort()[0] - 273.15) * (9 / 5) + 32).toString() +
-      "\u00B0F",
-    Math.ceil(
-      (day_two_temps.sort()[day_two_temps.length - 1] - 273.15) * (9 / 5) + 32
-    ).toString() + "\u00B0F",
-    "Day 3 temps:",
-    Math.floor((day_three_temps.sort()[0] - 273.15) * (9 / 5) + 32).toString() +
-      "\u00B0F",
-    Math.ceil(
-      (day_three_temps.sort()[day_three_temps.length - 1] - 273.15) * (9 / 5) +
-        32
-    ).toString() + "\u00B0F",
-    "Day 4 temps:",
-    Math.floor((day_four_temps.sort()[0] - 273.15) * (9 / 5) + 32).toString() +
-      "\u00B0F",
-    Math.ceil(
-      (day_four_temps.sort()[day_four_temps.length - 1] - 273.15) * (9 / 5) + 32
-    ).toString() + "\u00B0F",
-    "Day 5 temps:",
-    Math.floor((day_five_temps.sort()[0] - 273.15) * (9 / 5) + 32).toString() +
-      "\u00B0F",
-    Math.ceil(
-      (day_five_temps.sort()[day_five_temps.length - 1] - 273.15) * (9 / 5) + 32
-    ).toString() + "\u00B0F",
-    "Day 6 temps:",
-    Math.floor((day_six_temps.sort()[0] - 273.15) * (9 / 5) + 32).toString() +
-      "\u00B0F",
-    Math.ceil(
-      (day_six_temps.sort()[day_six_temps.length - 1] - 273.15) * (9 / 5) + 32
-    ).toString() + "\u00B0F"
-  );
+      data[index].weather.push(
+        Math.round((all_temps[x].main.temp - 273) * (9 / 5) + 32).toString() +
+          "\u00B0F"
+      );
+    }
+    // console.log(all_temps[x].weather[0].description);
+  }
+  console.log(data);
 
   return (
     <div>
@@ -118,3 +74,8 @@ export default function WeeklyForecast({ weekly }) {
     </div>
   );
 }
+
+// data =[]
+
+// data.push ({day: xfdgfdh, })
+//TODO push all of the weather to a variable array inside of the for loop, then once all temps are gathered for each day, go ahead and push day:{mon},temps:{344.33},icon:{'sunny'}
