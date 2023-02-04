@@ -53,9 +53,9 @@ export default function WeeklyForecast({ weekly }) {
     <div>
       {/* display the highest and lowest for each day of the week */}
       {/* grab the day of the week (5th number in date), sort the temp values, grab the highest and lowest */}
-      <div className="Weather_Day_container">
+      <div>
         <h3>Weekly Weather Forecast</h3>
-        <div>
+        <div className="weather_day_container">
           {data.map((item, k) => {
             const sum =
               Math.round(
@@ -65,7 +65,7 @@ export default function WeeklyForecast({ weekly }) {
             console.log(item.day, k);
             console.log(item.weather.length);
             return (
-              <div>
+              <div className="day_container">
                 {" "}
                 <h4>{item.day}</h4>
                 <h4>{sum}</h4>
