@@ -9,12 +9,10 @@ export default function CurrentWeather({ current, showWeather }) {
   // const weatherDescription = showWeather.data.weather[0].description
   // const wind = showWeather.data.wind.speed < 10 ? "Slight Wind" : showWeather.data.wind.speed > 10 && showWeather.data.wind.speed < 30 ? "Moderate Wind" : "High Wind"
   //ALec is really smart
-  const d = new Date();
-  console.log(d, "sdfds");
+  //   const d = new Date();
   //TODO We can use the Date() function to get the current date and time to display on our current weather page ex: Mon Jan 23 2023 17:40:11 GMT-0700 (Mountain Standard Time)
-  console.log(new Date(1674907200 * 1000), "this one");
-  let day = d.getDay();
-  console.log(day);
+  //   let day = d.getDay();
+  //   console.log(day);
   //TODO This will give you a number that can be used to correspond do a day of the week 0-6.
 
   console.log(current);
@@ -31,6 +29,9 @@ export default function CurrentWeather({ current, showWeather }) {
 
   return (
     <div>
+      <div>
+        <h2>Current Weather</h2>
+      </div>
       <div>{name}</div>
       <div>{temp} ˚F</div>
       <div>{weatherDescription}</div>
