@@ -1,4 +1,4 @@
-import { all } from "axios";
+// import { all } from "axios";
 
 export default function WeeklyForecast({ weekly }) {
   if (weekly.length < 1) {
@@ -11,7 +11,7 @@ export default function WeeklyForecast({ weekly }) {
   const city = weekly.data.city.name;
   const country = weekly.data.city.country;
   console.log(weekly.data);
-
+  console.log(all_temps, "stats");
   for (let x = 0, week = []; x < all_temps.length; x++) {
     //TODO this gets the days of the week for the weekly forecast.
     if (
@@ -37,6 +37,9 @@ export default function WeeklyForecast({ weekly }) {
         day: new Date(all_temps[x].dt * 1000).toDateString().substring(0, 3),
         description: all_temps[x].weather[0].description,
         weather: [Math.round((all_temps[x].main.temp - 273) * (9 / 5) + 32)],
+        time: [
+          Number(new Date(all_temps[x].dt * 1000).toString().substring(16, 18)),
+        ],
         icon: all_temps[x].weather[0].icon,
       });
     } else if (
@@ -48,16 +51,15 @@ export default function WeeklyForecast({ weekly }) {
       data[index].weather.push(
         Math.round((all_temps[x].main.temp - 273) * (9 / 5) + 32)
       );
+      data[index].time.push(
+        Number(new Date(all_temps[x].dt * 1000).toString().substring(16, 18))
+      );
     }
   }
   console.log(data);
-  //   function clicked() {
-  //     console.log("clicked");
-  //   }
+
   return (
     <div>
-      {/* display the highest and lowest for each day of the week */}
-      {/* grab the day of the week (5th number in date), sort the temp values, grab the highest and lowest */}
       <div>
         <h3>
           Six Day Forecast For {city}, {country}
@@ -70,6 +72,10 @@ export default function WeeklyForecast({ weekly }) {
               ).toString() + "\u00B0F";
             function clicked() {
               console.log("clicked", k);
+              let cow = Number(
+                new Date(all_temps[k].dt * 1000).toString().substring(16, 18)
+              );
+              cow > 12 ? console.log(cow - 12, "PM") : console.log(cow, "AM");
             }
             return (
               <div
@@ -83,6 +89,7 @@ export default function WeeklyForecast({ weekly }) {
                 <h4>{item.day}</h4>
                 <h4>{sum}</h4>
                 <img
+                  alt="weather-pic"
                   src={`https://openweathermap.org/img/w/${item.icon}.png`}
                 />
                 <h5>{item.description}</h5>
@@ -91,10 +98,8 @@ export default function WeeklyForecast({ weekly }) {
             );
           })}
         </div>
-        <div></div>
+        <div>Other Information</div>
       </div>
     </div>
   );
 }
-
-//TODO push all of the weather to a variable array inside of the for loop, then once all temps are gathered for each day, go ahead and push day:{mon},temps:{344.33},icon:{'sunny'}
