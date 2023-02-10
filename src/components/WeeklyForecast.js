@@ -1,6 +1,9 @@
 // import { all } from "axios";
+import HourlyForecast from "./HourlyForecast";
+import { useState } from "react";
 
 export default function WeeklyForecast({ weekly }) {
+  const [Hourly, setHourly] = useState(false);
   if (weekly.length < 1) {
     return "Loading...";
   }
@@ -10,10 +13,8 @@ export default function WeeklyForecast({ weekly }) {
   const data = [];
   const city = weekly.data.city.name;
   const country = weekly.data.city.country;
-  console.log(weekly.data);
-  console.log(all_temps, "stats");
+
   for (let x = 0, week = []; x < all_temps.length; x++) {
-    //TODO this gets the days of the week for the weekly forecast.
     if (
       !weeklyDays.includes(
         new Date(all_temps[x].dt * 1000).toDateString().substring(0, 3)
@@ -57,7 +58,13 @@ export default function WeeklyForecast({ weekly }) {
     }
   }
   console.log(data);
-
+  // console.log(Hourly, "sffdsfdsfd");
+  const clicked = (key) => {
+    // console.log("yep", key);
+    // console.log(data[key]);
+    setHourly(true);
+    Hourt(key);
+  };
   return (
     <div>
       <div>
@@ -65,26 +72,13 @@ export default function WeeklyForecast({ weekly }) {
           Six Day Forecast For {city}, {country}
         </h3>
         <div className="weather_day_container">
-          {data.map((item, k) => {
+          {data.map((item, key) => {
             const sum =
               Math.round(
                 item.weather.reduce((a, b) => a + b, 0) / item.weather.length
               ).toString() + "\u00B0F";
-            function clicked() {
-              console.log("clicked", k);
-              let cow = Number(
-                new Date(all_temps[k].dt * 1000).toString().substring(16, 18)
-              );
-              cow > 12 ? console.log(cow - 12, "PM") : console.log(cow, "AM");
-            }
             return (
-              <div
-                onClick={clicked}
-                // onClick={console.log("clicky")}
-                id={k}
-                key={k}
-                className="day_container"
-              >
+              <div id={key} key={key} className="day_container">
                 {" "}
                 <h4>{item.day}</h4>
                 <h4>{sum}</h4>
@@ -93,13 +87,39 @@ export default function WeeklyForecast({ weekly }) {
                   src={`https://openweathermap.org/img/w/${item.icon}.png`}
                 />
                 <h5>{item.description}</h5>
-                <button>Hourly.</button>
+                <button id={`clicked-${key}`} onClick={() => clicked(key)}>
+                  Hourly.
+                </button>
               </div>
             );
           })}
         </div>
         <div>Other Information</div>
+        {Hourly === true ? <HourlyForecast /> : null}
+
+        <div></div>
+        <Hourt />
       </div>
     </div>
   );
+  function Hourt(key) {
+    console.log(key, "this is a key");
+    if (typeof { key } == "number") {
+      return "Loading...";
+    }
+
+    return (
+      <div>
+        <h2>{data[0].day}</h2>
+        <h4>{data[0].weather[0].toString() + "\u00B0F"}</h4>
+        <h4>
+          {data[0].time[0] > 12
+            ? (data[0].time[0] - 12).toString() + ":00 PM"
+            : data[0].time[0].toString() + ":00 AM"}
+        </h4>
+
+        <div></div>
+      </div>
+    );
+  }
 }
