@@ -58,13 +58,14 @@ export default function WeeklyForecast({ weekly }) {
     }
   }
   console.log(data);
+
   // console.log(Hourly, "sffdsfdsfd");
-  const clicked = (key) => {
-    // console.log("yep", key);
-    // console.log(data[key]);
-    setHourly(true);
-    Hourt(key);
-  };
+  // const clicked = (key) => {
+  //   console.log("yep", key);
+  //   // console.log(data[key]);
+  //   setHourly(true);
+  //   // Hourt(key);
+  // };
   return (
     <div>
       <div>
@@ -87,8 +88,16 @@ export default function WeeklyForecast({ weekly }) {
                   src={`https://openweathermap.org/img/w/${item.icon}.png`}
                 />
                 <h5>{item.description}</h5>
-                <button id={`clicked-${key}`} onClick={() => clicked(key)}>
-                  Hourly.
+                <button
+                  id={`clicked-${key}`}
+                  onClick={() => {
+                    Hourt(key);
+                    // console.log(key, "sssdddddd");
+
+                    setHourly(true);
+                  }}
+                >
+                  Hourly Forecast
                 </button>
               </div>
             );
@@ -102,12 +111,15 @@ export default function WeeklyForecast({ weekly }) {
       </div>
     </div>
   );
+
   function Hourt(key) {
-    console.log(key, "this is a key");
-    if (typeof { key } == "number") {
+    // console.log(key, "this is a key");
+
+    if (Hourly == false) {
       return "Loading...";
     }
 
+    console.log(key);
     return (
       <div>
         <h2>{data[0].day}</h2>
