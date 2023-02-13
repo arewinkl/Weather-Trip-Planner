@@ -36,8 +36,14 @@ export default function WeeklyForecast({ weekly }) {
     ) {
       data.push({
         day: new Date(all_temps[x].dt * 1000).toDateString().substring(0, 3),
-        description: all_temps[x].weather[0].description,
+        description: [all_temps[x].weather[0].description],
         weather: [Math.round((all_temps[x].main.temp - 273) * (9 / 5) + 32)],
+        hourIcons: [all_temps[x].weather[0].icon],
+        wind: {
+          gust: all_temps[x].wind.gust,
+          speed: all_temps[x].wind.speed,
+          degree: all_temps[x].wind.deg,
+        },
         time: [
           Number(new Date(all_temps[x].dt * 1000).toString().substring(16, 18)),
         ],
@@ -48,24 +54,20 @@ export default function WeeklyForecast({ weekly }) {
       new Date(all_temps[x].dt * 1000).toDateString().substring(0, 3)
     ) {
       let index = week.length - 1;
-
+      data[index].description.push(all_temps[x].weather[0].description);
+      data[index].hourIcons.push(all_temps[x].weather[0].icon);
       data[index].weather.push(
         Math.round((all_temps[x].main.temp - 273) * (9 / 5) + 32)
       );
       data[index].time.push(
         Number(new Date(all_temps[x].dt * 1000).toString().substring(16, 18))
       );
+
+      // data[index].wind.push({ speed: all_temps[x].wind.speed });
     }
   }
   console.log(data);
-
-  // console.log(Hourly, "sffdsfdsfd");
-  // const clicked = (key) => {
-  //   console.log("yep", key);
-  //   // console.log(data[key]);
-  //   setHourly(true);
-  //   // Hourt(key);
-  // };
+  console.log(data[0].wind.speed, "wind speed");
   return (
     <div>
       <div>
@@ -84,16 +86,14 @@ export default function WeeklyForecast({ weekly }) {
                 <h4>{item.day}</h4>
                 <h4>{sum}</h4>
                 <img
-                  alt="weather-pic"
+                  alt={`weather-pic${key}`}
                   src={`https://openweathermap.org/img/w/${item.icon}.png`}
                 />
-                <h5>{item.description}</h5>
+                <h5>{item.description[0]}</h5>
                 <button
                   id={`clicked-${key}`}
                   onClick={() => {
                     Hourt(key);
-                    // console.log(key, "sssdddddd");
-
                     setHourly(true);
                   }}
                 >
@@ -103,33 +103,47 @@ export default function WeeklyForecast({ weekly }) {
             );
           })}
         </div>
-        <div>Other Information</div>
+        <h2>Other Information</h2>
+        <hr className="divider"></hr>
+
         {Hourly === true ? <HourlyForecast /> : null}
 
         <div></div>
         <Hourt />
       </div>
+      <hr className="divider"></hr>
     </div>
   );
 
   function Hourt(key) {
-    // console.log(key, "this is a key");
-
     if (Hourly == false) {
       return "Loading...";
     }
-
     console.log(key);
+    console.log(all_temps);
     return (
-      <div>
-        <h2>{data[0].day}</h2>
-        <h4>{data[0].weather[0].toString() + "\u00B0F"}</h4>
-        <h4>
-          {data[0].time[0] > 12
-            ? (data[0].time[0] - 12).toString() + ":00 PM"
-            : data[0].time[0].toString() + ":00 AM"}
-        </h4>
-
+      <div className="hours">
+        <h2>{data[0].day}day hourly forecast</h2>
+        <div className="weather_hour_container">
+          {data[0].weather.map((item, way) => {
+            console.log(data[0].hourIcons[way]);
+            return (
+              <div id={key} key={way} className="day_container">
+                <h4>
+                  {data[0].time[0] > 12
+                    ? (data[0].time[way] - 12).toString() + ":00 PM"
+                    : data[0].time[way].toString() + ":00 AM"}
+                </h4>
+                <img
+                  alt="pics"
+                  src={`https://openweathermap.org/img/w/${data[0].hourIcons[way]}.png`}
+                />
+                <h4>{data[0].description[way]}</h4>
+                <h3>{item.toString() + "\u00B0F"}</h3>
+              </div>
+            );
+          })}
+        </div>
         <div></div>
       </div>
     );
