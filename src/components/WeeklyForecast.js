@@ -40,9 +40,9 @@ export default function WeeklyForecast({ weekly }) {
         weather: [Math.round((all_temps[x].main.temp - 273) * (9 / 5) + 32)],
         hourIcons: [all_temps[x].weather[0].icon],
         wind: {
-          gust: all_temps[x].wind.gust,
-          speed: all_temps[x].wind.speed,
-          degree: all_temps[x].wind.deg,
+          gust: [all_temps[x].wind.gust],
+          speed: [all_temps[x].wind.speed],
+          degree: [all_temps[x].wind.deg],
         },
         time: [
           Number(new Date(all_temps[x].dt * 1000).toString().substring(16, 18)),
@@ -63,7 +63,9 @@ export default function WeeklyForecast({ weekly }) {
         Number(new Date(all_temps[x].dt * 1000).toString().substring(16, 18))
       );
 
-      // data[index].wind.push({ speed: all_temps[x].wind.speed });
+      data[index].wind.gust.push(all_temps[x].wind.gust);
+      data[index].wind.speed.push(all_temps[x].wind.speed);
+      data[index].wind.degree.push(all_temps[x].wind.deg);
     }
   }
   console.log(data);
@@ -123,22 +125,22 @@ export default function WeeklyForecast({ weekly }) {
     console.log(all_temps);
     return (
       <div className="hours">
-        <h2>{data[0].day}day hourly forecast</h2>
+        <h2>{data[1].day}day hourly forecast</h2>
         <div className="weather_hour_container">
-          {data[0].weather.map((item, way) => {
+          {data[1].weather.map((item, way) => {
             console.log(data[0].hourIcons[way]);
             return (
               <div id={key} key={way} className="day_container">
                 <h4>
-                  {data[0].time[0] > 12
-                    ? (data[0].time[way] - 12).toString() + ":00 PM"
-                    : data[0].time[way].toString() + ":00 AM"}
+                  {data[1].time[0] > 12
+                    ? (data[1].time[way] - 12).toString() + ":00 PM"
+                    : data[1].time[way].toString() + ":00 AM"}
                 </h4>
                 <img
                   alt="pics"
-                  src={`https://openweathermap.org/img/w/${data[0].hourIcons[way]}.png`}
+                  src={`https://openweathermap.org/img/w/${data[1].hourIcons[way]}.png`}
                 />
-                <h4>{data[0].description[way]}</h4>
+                <h4>{data[1].description[way]}</h4>
                 <h3>{item.toString() + "\u00B0F"}</h3>
               </div>
             );
