@@ -4,6 +4,7 @@ import { useState } from "react";
 
 export default function WeeklyForecast({ weekly }) {
   const [Hourly, setHourly] = useState(false);
+  const [DayKey, setDayKey] = useState("");
   if (weekly.length < 1) {
     return "Loading...";
   }
@@ -68,8 +69,8 @@ export default function WeeklyForecast({ weekly }) {
       data[index].wind.degree.push(all_temps[x].wind.deg);
     }
   }
-  console.log(data);
-  console.log(data[0].wind.speed, "wind speed");
+  // console.log(data);
+  // console.log(data[0].wind.speed, "wind speed");
   return (
     <div>
       <div>
@@ -95,8 +96,10 @@ export default function WeeklyForecast({ weekly }) {
                 <button
                   id={`clicked-${key}`}
                   onClick={() => {
+                    console.log(key);
                     Hourt(key);
                     setHourly(true);
+                    setDayKey(key);
                   }}
                 >
                   Hourly Forecast
@@ -121,26 +124,28 @@ export default function WeeklyForecast({ weekly }) {
     if (Hourly == false) {
       return "Loading...";
     }
-    console.log(key);
-    console.log(all_temps);
+    // console.log(key, "kerretretrt");
+    // console.log(all_temps);
+    // console.log(DayKey);
     return (
       <div className="hours">
-        <h2>{data[1].day}day hourly forecast</h2>
+        <h2>{data[DayKey].day}day hourly forecast</h2>
         <div className="weather_hour_container">
-          {data[1].weather.map((item, way) => {
-            console.log(data[0].hourIcons[way]);
+          {data[DayKey].weather.map((item, way) => {
+            // console.log(data[0].hourIcons[way]);
+            console.log(data[DayKey].time[0]);
             return (
               <div id={key} key={way} className="day_container">
                 <h4>
-                  {data[1].time[0] > 12
-                    ? (data[1].time[way] - 12).toString() + ":00 PM"
-                    : data[1].time[way].toString() + ":00 AM"}
+                  {data[DayKey].time[way] > 12
+                    ? (data[DayKey].time[way] - 12).toString() + ":00 PM"
+                    : data[DayKey].time[way].toString() + ":00 AM"}
                 </h4>
                 <img
                   alt="pics"
-                  src={`https://openweathermap.org/img/w/${data[1].hourIcons[way]}.png`}
+                  src={`https://openweathermap.org/img/w/${data[DayKey].hourIcons[way]}.png`}
                 />
-                <h4>{data[1].description[way]}</h4>
+                <h4>{data[DayKey].description[way]}</h4>
                 <h3>{item.toString() + "\u00B0F"}</h3>
               </div>
             );
