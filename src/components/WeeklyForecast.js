@@ -3,8 +3,8 @@ import HourlyForecast from "./HourlyForecast";
 import { useState } from "react";
 
 export default function WeeklyForecast({ weekly }) {
-  const [Hourly, setHourly] = useState(false);
-  const [DayKey, setDayKey] = useState("");
+  const [hourly, setHourly] = useState(false);
+  const [dayKey, setDayKey] = useState("");
   if (weekly.length < 1) {
     return "Loading...";
   }
@@ -99,7 +99,6 @@ export default function WeeklyForecast({ weekly }) {
                   id={`clicked-${key}`}
                   onClick={() => {
                     console.log(key);
-                    Hourt(key);
                     setHourly(true);
                     setDayKey(key);
                   }}
@@ -113,73 +112,10 @@ export default function WeeklyForecast({ weekly }) {
         <h2>Additional Forecasting</h2>
         <hr className="divider"></hr>
 
-        {Hourly === true ? <HourlyForecast /> : null}
-
+        {hourly === true ? <HourlyForecast data={data} hourly={hourly} dayKey={dayKey}/> : null}
         <div></div>
-        <Hourt />
       </div>
       <hr className="divider"></hr>
     </div>
   );
-
-  function Hourt(key) {
-    if (Hourly == false) {
-      return "Loading...";
-    }
-    return (
-      <div className="hours">
-        <h2>{data[DayKey].day}day hourly forecast</h2>
-        <div className="weather_hour_container">
-          {data[DayKey].weather.map((item, index) => {
-            // console.log(data[DayKey].time[0]);
-            console.log(Math.max(...data[DayKey].wind.speed));
-
-            return (
-              <div id={key} key={index} className="hours_container">
-                <h4>
-                  {data[DayKey].time[index] > 12
-                    ? (data[DayKey].time[index] - 12).toString() + ":00 PM"
-                    : data[DayKey].time[index].toString() + ":00 AM"}
-                </h4>
-                <img
-                  alt="pics"
-                  src={`https://openweathermap.org/img/w/${data[DayKey].hourIcons[index]}.png`}
-                />
-                <h5>{data[DayKey].description[index]}</h5>
-                <h3>{item.toString() + "\u00B0F"}</h3>
-              </div>
-            );
-          })}
-        </div>
-        <hr className="divider"></hr>
-
-        <div className="wind_container">
-          <h3>Wind</h3>
-          <h5>
-            Speed:{Math.min(...data[DayKey].wind.speed)}mph -
-            {Math.max(...data[DayKey].wind.speed)}mph
-          </h5>
-          <h5>
-            Average gusts:{" "}
-            {(
-              data[DayKey].wind.gust.reduce((a, b) => a + b) /
-              data[DayKey].wind.gust.length
-            ).toFixed(2)}{" "}
-            mph
-          </h5>
-        </div>
-        <div className="humidity_container">
-          <h3>Humidity Level</h3>
-          <h1>
-            {" "}
-            {(
-              data[DayKey].humidity.reduce((a, b) => a + b) /
-              data[DayKey].humidity.length
-            ).toFixed(2)}{" "}
-            %
-          </h1>
-        </div>
-      </div>
-    );
-  }
 }
