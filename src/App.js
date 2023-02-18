@@ -13,8 +13,10 @@ GetAllWeather();
 
 function App() {
   const API_KEY = process.env.REACT_APP_WEATHER_KEY;
+  const NEWS_API_KEY = process.env.REACT_APP_NEWS_KEY;
   const [current, setCurrent] = useState([]);
   const [weekly, setWeekly] = useState([]);
+  const [news, setNews] = useState([])
   const [map, setMap] = useState([]);
 
   useEffect(() => {
@@ -56,6 +58,21 @@ function App() {
     setWeekly(weeklyWeather);
   }
 
+  async function newsSearch() {
+    const newsLink = await axios.get(
+      `https://api.nytimes.com/svc/mostpopular/v2/emailed/7.json?api-key=${NEWS_API_KEY}`
+    );
+    setNews(newsLink)
+  }
+
+  useEffect(() => {
+    fetch(`https://api.nytimes.com/svc/mostpopular/v2/emailed/7.json?api-key=${NEWS_API_KEY}`)
+    .then(res => res.json())
+    .then((data) => setNews(data))
+  }, []);
+
+
+console.log(news)
   return (
     <div className="App">
       <NavBar currentSearch={currentSearch} weeklySearch={weeklySearch} />
