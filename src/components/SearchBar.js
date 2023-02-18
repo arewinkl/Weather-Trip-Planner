@@ -20,8 +20,6 @@ export default function SearchBar({ currentSearch, weeklySearch }) {
       currentSearch(citySearch, stateSearch);
       weeklySearch(citySearch, stateSearch);
     }
-    // setCitySearch('')
-    // setStateSearch('')
   }
 
   return (
