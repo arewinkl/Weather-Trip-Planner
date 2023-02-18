@@ -46,6 +46,7 @@ export default function WeeklyForecast({ weekly }) {
           speed: [all_temps[x].wind.speed],
           degree: [all_temps[x].wind.deg],
         },
+        humidity: [all_temps[x].main.humidity],
         time: [
           Number(new Date(all_temps[x].dt * 1000).toString().substring(16, 18)),
         ],
@@ -68,6 +69,7 @@ export default function WeeklyForecast({ weekly }) {
       data[index].wind.gust.push(all_temps[x].wind.gust);
       data[index].wind.speed.push(all_temps[x].wind.speed);
       data[index].wind.degree.push(all_temps[x].wind.deg);
+      data[index].humidity.push(all_temps[x].main.humidity);
     }
   }
 
@@ -165,6 +167,17 @@ export default function WeeklyForecast({ weekly }) {
             ).toFixed(2)}{" "}
             mph
           </h5>
+        </div>
+        <div className="humidity_container">
+          <h3>Humidity Level</h3>
+          <h1>
+            {" "}
+            {(
+              data[DayKey].humidity.reduce((a, b) => a + b) /
+              data[DayKey].humidity.length
+            ).toFixed(2)}{" "}
+            %
+          </h1>
         </div>
       </div>
     );
