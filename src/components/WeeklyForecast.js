@@ -14,6 +14,7 @@ export default function WeeklyForecast({ weekly }) {
   const data = [];
   const city = weekly.data.city.name;
   const country = weekly.data.city.country;
+  console.log(data, "dataaaa");
 
   for (let x = 0, week = []; x < all_temps.length; x++) {
     if (
@@ -69,8 +70,7 @@ export default function WeeklyForecast({ weekly }) {
       data[index].wind.degree.push(all_temps[x].wind.deg);
     }
   }
-  // console.log(data);
-  // console.log(data[0].wind.speed, "wind speed");
+
   return (
     <div>
       <div>
@@ -108,7 +108,7 @@ export default function WeeklyForecast({ weekly }) {
             );
           })}
         </div>
-        <h2>Other Information</h2>
+        <h2>Additional Forecasting</h2>
         <hr className="divider"></hr>
 
         {Hourly === true ? <HourlyForecast /> : null}
@@ -124,34 +124,48 @@ export default function WeeklyForecast({ weekly }) {
     if (Hourly == false) {
       return "Loading...";
     }
-    // console.log(key, "kerretretrt");
-    // console.log(all_temps);
-    // console.log(DayKey);
     return (
       <div className="hours">
         <h2>{data[DayKey].day}day hourly forecast</h2>
         <div className="weather_hour_container">
-          {data[DayKey].weather.map((item, way) => {
-            // console.log(data[0].hourIcons[way]);
-            console.log(data[DayKey].time[0]);
+          {data[DayKey].weather.map((item, index) => {
+            // console.log(data[DayKey].time[0]);
+            console.log(Math.max(...data[DayKey].wind.speed));
+
             return (
-              <div id={key} key={way} className="day_container">
+              <div id={key} key={index} className="hours_container">
                 <h4>
-                  {data[DayKey].time[way] > 12
-                    ? (data[DayKey].time[way] - 12).toString() + ":00 PM"
-                    : data[DayKey].time[way].toString() + ":00 AM"}
+                  {data[DayKey].time[index] > 12
+                    ? (data[DayKey].time[index] - 12).toString() + ":00 PM"
+                    : data[DayKey].time[index].toString() + ":00 AM"}
                 </h4>
                 <img
                   alt="pics"
-                  src={`https://openweathermap.org/img/w/${data[DayKey].hourIcons[way]}.png`}
+                  src={`https://openweathermap.org/img/w/${data[DayKey].hourIcons[index]}.png`}
                 />
-                <h4>{data[DayKey].description[way]}</h4>
+                <h5>{data[DayKey].description[index]}</h5>
                 <h3>{item.toString() + "\u00B0F"}</h3>
               </div>
             );
           })}
         </div>
-        <div></div>
+        <hr className="divider"></hr>
+
+        <div className="wind_container">
+          <h3>Wind</h3>
+          <h5>
+            Speed:{Math.min(...data[DayKey].wind.speed)}mph -
+            {Math.max(...data[DayKey].wind.speed)}mph
+          </h5>
+          <h5>
+            Average gusts:{" "}
+            {(
+              data[DayKey].wind.gust.reduce((a, b) => a + b) /
+              data[DayKey].wind.gust.length
+            ).toFixed(2)}{" "}
+            mph
+          </h5>
+        </div>
       </div>
     );
   }

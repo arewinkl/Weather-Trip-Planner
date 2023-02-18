@@ -91,10 +91,35 @@ display: flex;
   }
 
 .day_container{
-  margin-right: 30px;
+  margin-right: 15px;
+  margin-left: 15px;
   border:solid 5px white;
   border-radius: 25px;
   width: 150px;
+  text-align: center;
+  
+}
+.hours_container{
+  margin-right: 15px;
+  margin-left: 15px;
+  border:solid 5px white;
+  background-color: rgb(91, 124, 147);
+  opacity: .9;
+  
+  border-radius: 25px;
+  width: 105px;
+  text-align: center;
+  
+}
+.wind_container{
+  margin-right: 15px;
+  margin-left: 15px;
+  border:solid 5px white;
+  background-color: rgb(28, 49, 64);
+  opacity: .9;
+  
+  border-radius: 25px;
+  width: 250px;
   text-align: center;
   
 }
