@@ -1,18 +1,26 @@
-export default function Home({news, weatherNews}){
+import NewsArticles from "./NewsArticles";
 
-    // const weatherNews = []
-    // const nonWeatherNews = []
+export default function Home({ weatherNews }) {
+  // const weatherNews = []
+  // const nonWeatherNews = []
 
-    // if (news.length < 1){
-    // } else{
-    //   news.results.map((n, i) => {
-    //     n.adx_keywords.includes('Weather') == true ? weatherNews.push(n) : nonWeatherNews.push(n)
-    //   })
-    // }
+  // if (news.length < 1){
+  // } else{
+  //   news.results.map((n, i) => {
+  //     n.adx_keywords.includes('Weather') == true ? weatherNews.push(n) : nonWeatherNews.push(n)
+  //   })
+  // }
 
-    console.log(weatherNews)
-    return(
-        <div>
-        </div>
-    )
+  //   console.log(weatherNews);
+  return (
+    <div>
+      <div>
+        <h5>Saved searches</h5>
+      </div>
+      <div>
+        <h4> NEWS</h4>
+        <NewsArticles weatherNews={weatherNews} />
+      </div>
+    </div>
+  );
 }
