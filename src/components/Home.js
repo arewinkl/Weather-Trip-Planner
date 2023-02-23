@@ -16,6 +16,7 @@ export default function Home({ weatherNews }) {
     <div>
       <div>
         <h5>Saved searches</h5>
+        {/* We want saved searches to render and be clickable to find weather, and then take you to current weather for that city. */}
       </div>
       <div>
         <h4> NEWS</h4>
