@@ -81,7 +81,7 @@ function App() {
       .then((data) => setWeatherNews(data));
   }, []);
 
-  console.log(weatherNews);
+  // console.log(weatherNews);
 
   // console.log(archiveNews)
   return (

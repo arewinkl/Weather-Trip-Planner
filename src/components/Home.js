@@ -1,3 +1,5 @@
+import NewsArticles from "./NewsArticles";
+
 export default function Home({ weatherNews }) {
   // const weatherNews = []
   // const nonWeatherNews = []
@@ -9,7 +11,7 @@ export default function Home({ weatherNews }) {
   //   })
   // }
 
-  console.log(weatherNews);
+  //   console.log(weatherNews);
   return (
     <div>
       <div>
@@ -17,6 +19,7 @@ export default function Home({ weatherNews }) {
       </div>
       <div>
         <h4> NEWS</h4>
+        <NewsArticles weatherNews={weatherNews} />
       </div>
     </div>
   );
