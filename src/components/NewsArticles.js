@@ -5,6 +5,11 @@ export default function NewsArticles({ weatherNews }) {
     return "news on the way.....";
   }
   const image = weatherNews.response.docs[0].multimedia[0].url;
+
+  const weatherNewsStories = (weatherNews.response.docs)
+
+  console.log(weatherNewsStories)
+
   return (
     <div>
       <div>
@@ -14,8 +19,26 @@ export default function NewsArticles({ weatherNews }) {
         <img
           alt="picture"
           typeof="image"
-          src={`${weatherNews.response.docs[0].multimedia[0].legacy.xlarge}`}
+          src={`https://static01.nyt.com/${weatherNews.response.docs[0].multimedia[0].legacy.xlarge}`}
         />
+      </div>
+      <br/>
+      <div>
+        {weatherNewsStories.map((story, i) => {
+          if (i == 0){
+          } else
+          return(
+            <a href={story.web_url}>
+              <img 
+                alt="picture"
+                typeof="image"
+                src={`https://static01.nyt.com/${story.multimedia[0].legacy.xlarge}`}
+              />
+              <h4>{story.headline.main}</h4>
+            </a>
+          )
+        }
+          )}
       </div>
     </div>
   );
